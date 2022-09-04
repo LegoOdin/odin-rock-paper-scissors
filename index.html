@@ -10,7 +10,59 @@
   </body>
 
   <script>
-    console.log("Hello World");
-  </script>
+function playRound(playerSelection, computerSelection){
+    if (playerSelection === computerSelection){
+        console.log("Draw, no winners this round")
+        return draws++
+    } else if (playerSelection === "rock" && computerSelection === "scissors"){
+        console.log("Player Wins the round")
+        return userWins++    
+    } else if (playerSelection === "scissors" && computerSelection === "paper"){
+        console.log("Player Wins the round")
+        return userWins++    
+    } else if (playerSelection === "paper" && computerSelection === "rock"){
+        console.log("Player Wins the round")
+        return userWins++    
+    } else {
+        losingMessage=losingMessage.concat("Computer wins the round, ", computerSelection," beats ",playerSelection);
+        console.log(losingMessage)
+        return compWins++    
+    }
+}
+
+function getComputerChoice(){
+    let randNum = Math.floor(Math.random() * (3-1+1))+1;
+    if (randNum === 1){
+        return "rock";
+    } else if (randNum === 2){
+        return "paper";
+    } else return "scissors";
+}
+    let userWins = 0;
+    let compWins = 0;
+    let draws = 0;
+    let losingMessage = "";
+
+
+function game(){
+        for (let i = 1; i<6; i++){
+            let userTypedSelection = window.prompt("Rock, Paper, Scissors: ");
+            let playerSelection = userTypedSelection.toLowerCase();
+            const computerSelection = getComputerChoice();
+            console.log("Round " + i);
+            console.log("Computer picks = "+computerSelection +", Player Picks = "+ playerSelection)
+            playRound(playerSelection, computerSelection)
+            console.log("Score, Computer="+compWins+", Player="+userWins+", draws="+draws);
+            if (i === 6 && userWins>compWins){
+                console.log("Congratulations!!! You win the game")
+            } else if (i === 6 && compWins>userWins) {
+                console.log("Unlucky, you lose this game")
+            } else if (i === 6) {
+                console.log("Its a tie!, no winners this game just losers")
+            }
+        }
+}
+game()
+  </script> 
 
 </html>
